@@ -48,6 +48,17 @@ class Restaurant {
 
         Restaurant.all.push(this);
     }
+    update(updates) {
+        this.name = updates.name || this.name
+        this.menus = updates.menus || this.menus
+        const update = db.prepare('UPDATE restaurants SET name=?,WHERE id=?;')
+        update.run(this.name, this.id)
+    }
+    delete() {
+        db.prepare('DELETE FROM restaurants WHERE id = ?;').run(this.id)
+        const index = Restaurant.all.index0f(this)
+        Restaurant.all.splice(index, 1)
+    }
 
     addMenu(menu) {
         this.menus.push(menu);
