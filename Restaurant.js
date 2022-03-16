@@ -56,7 +56,7 @@ class Restaurant {
     }
     delete() {
         db.prepare('DELETE FROM restaurants WHERE id = ?;').run(this.id)
-        const index = Restaurant.all.index0f(this)
+        const index = Restaurant.all.indexOf(this)
         Restaurant.all.splice(index, 1)
     }
 
