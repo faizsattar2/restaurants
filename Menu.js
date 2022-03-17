@@ -1,5 +1,6 @@
 const db = require('better-sqlite3')('./db.sqlite');
 const Item = require('./Item');
+const Restaurant = require("./Restaurant")
 
 class Menu {
     static init() {
@@ -35,5 +36,19 @@ class Menu {
     addItem(item) {
         this.items.push(item);
     }
+    update(updates) {
+        this.title = updates.title || this.title
+        this.items = updates.items || this.items
+        const update = db.prepare('UPDATE menus SET title=? WHERE id=?;')
+        update.run(this.title, this.id)
+    }
+    delete() {
+        db.prepare('DELETE FROM menus WHERE id = ?;').run(this.id)
+        const restaurant = Restaurant.all.find(function(restaurant){
+           return restaurant.id == this.restaurant_id 
+        },this)
+        restaurant.menus.splice(this.id, 1)
+    }
 }
+
 module.exports = Menu
