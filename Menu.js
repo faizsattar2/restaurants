@@ -47,7 +47,8 @@ class Menu {
         const restaurant = Restaurant.all.find(function(restaurant){
            return restaurant.id == this.restaurant_id 
         },this)
-        restaurant.menus.splice(this.id, 1)
+        const index = restaurant.menus.indexOf(this)
+        restaurant.menus.splice(index, 1)
     }
 }
 
