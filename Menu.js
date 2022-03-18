@@ -13,7 +13,7 @@ class Menu {
             );`
         ).run()
     }
-    static all =[]
+    static all = []
 
     constructor(restaurant_id, title, id) {
         this.restaurant_id = restaurant_id;
@@ -46,8 +46,12 @@ class Menu {
     }
     delete() {
         db.prepare('DELETE FROM menus WHERE id = ?;').run(this.id)
+        const restaurant = Restaurant.all.find(r => r.id == this.restaurant_id)
+        const rindex = restaurant.menus.indexOf(this)
+        restaurant.menus.splice(rindex,1)
         const index = Menu.all.indexOf(this)
         Menu.all.splice(index, 1)
+
     }
 }
 
