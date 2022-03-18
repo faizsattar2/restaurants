@@ -44,11 +44,8 @@ class Menu {
     }
     delete() {
         db.prepare('DELETE FROM menus WHERE id = ?;').run(this.id)
-        const restaurant = Restaurant.all.find(function(restaurant){
-           return restaurant.id == this.restaurant_id 
-        },this)
-        const index = restaurant.menus.indexOf(this)
-        restaurant.menus.splice(index, 1)
+        const index = Menu.all.indexOf(this)
+        Menu.all.splice(index, 1)
     }
 }
 
