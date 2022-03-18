@@ -13,6 +13,7 @@ class Menu {
             );`
         ).run()
     }
+    static all =[]
 
     constructor(restaurant_id, title, id) {
         this.restaurant_id = restaurant_id;
@@ -31,6 +32,7 @@ class Menu {
             const info = insert.run(this.restaurant_id, this.title);
             this.id = info.lastInsertRowid;
         }
+        Menu.all.push(this)
     }
 
     addItem(item) {
