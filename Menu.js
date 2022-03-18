@@ -44,13 +44,16 @@ class Menu {
         const update = db.prepare('UPDATE menus SET title=? WHERE id=?;')
         update.run(this.title, this.id)
     }
+    
     delete() {
         db.prepare('DELETE FROM menus WHERE id = ?;').run(this.id)
+        console.log(Restaurant.all)
         const restaurant = Restaurant.all.find(r => r.id == this.restaurant_id)
         const rindex = restaurant.menus.indexOf(this)
         restaurant.menus.splice(rindex,1)
         const index = Menu.all.indexOf(this)
         Menu.all.splice(index, 1)
+        
 
     }
 }
